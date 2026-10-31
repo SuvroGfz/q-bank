@@ -1,5 +1,12 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { BookOpen, Layers, HelpCircle, ArrowLeft } from 'lucide-react';
+import { PageShell, PageHeader } from '../components/ui/PageShell';
+import { Breadcrumb } from '../components/common/Breadcrumb';
+import { ChapterList } from '../components/chapter/ChapterList';
+import { StatCard } from '../components/ui/StatCard';
+import { EmptyState } from '../components/ui/EmptyState';
+import { Button } from '../components/ui/Button';
 import { useSubjects } from '../hooks/useSubjects';
 
 export const SubjectPage: React.FC = () => {
@@ -11,39 +18,66 @@ export const SubjectPage: React.FC = () => {
 
   if (!subject) {
     return (
-      <div className="py-12 text-center">
-        <h2 className="text-xl font-bold">Subject not found</h2>
-        <Link to="/" className="text-primary hover:underline mt-2 inline-block">
-          Return Home
-        </Link>
-      </div>
+      <PageShell>
+        <Breadcrumb items={[{ label: 'Subject Not Found' }]} />
+        <EmptyState
+          icon={HelpCircle}
+          title="Subject Not Found"
+          description={`We could not locate any subject with the identifier "${subjectId}".`}
+          actions={[
+            {
+              label: 'Return to All Subjects',
+              icon: ArrowLeft,
+              onClick: () => window.location.assign('/'),
+              variant: 'primary',
+            },
+          ]}
+        />
+      </PageShell>
     );
   }
 
+  const totalQuestions = chapters.reduce((sum, ch) => sum + ch.questionCount, 0);
+
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-3">
-        <span className="text-3xl">{subject.icon}</span>
-        <div>
-          <h1 className="text-2xl font-bold">{subject.name}</h1>
-          <p className="text-sm text-muted-foreground">{subject.description}</p>
-        </div>
+    <PageShell>
+      {/* Breadcrumb */}
+      <Breadcrumb items={[{ label: subject.name }]} />
+
+      {/* Header */}
+      <PageHeader
+        title={subject.name}
+        subtitle={subject.description}
+        icon={<span className="text-2xl select-none">{subject.icon}</span>}
+      >
+        <Link to="/">
+          <Button variant="outline" size="sm" className="gap-1.5">
+            <ArrowLeft className="h-3.5 w-3.5" />
+            <span>All Subjects</span>
+          </Button>
+        </Link>
+      </PageHeader>
+
+      {/* Subject Stats */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <StatCard
+          label="Chapters Available"
+          value={chapters.length}
+          icon={Layers}
+          subtext={`Structured learning modules in ${subject.name}`}
+          color="primary"
+        />
+        <StatCard
+          label="Practice Questions"
+          value={totalQuestions}
+          icon={BookOpen}
+          subtext="With hidden solutions & derivations"
+          color="secondary"
+        />
       </div>
-      <div className="space-y-3">
-        {chapters.map((ch) => (
-          <Link
-            key={ch.id}
-            to={`/subjects/${subject.id}/${ch.id}`}
-            className="p-4 border rounded-xl bg-card hover:border-primary transition-colors block"
-          >
-            <h3 className="font-semibold">{ch.name}</h3>
-            <p className="text-sm text-muted-foreground">{ch.description}</p>
-            <span className="text-xs text-primary font-medium mt-2 inline-block">
-              {ch.questionCount} Questions
-            </span>
-          </Link>
-        ))}
-      </div>
-    </div>
+
+      {/* Chapter List */}
+      <ChapterList chapters={chapters} subjectName={subject.name} />
+    </PageShell>
   );
 };

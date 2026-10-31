@@ -1,5 +1,11 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { BookOpen, ArrowLeft, HelpCircle, FileQuestion } from 'lucide-react';
+import { PageShell, PageHeader } from '../components/ui/PageShell';
+import { Breadcrumb } from '../components/common/Breadcrumb';
+import { QuestionList } from '../components/question/QuestionList';
+import { EmptyState } from '../components/ui/EmptyState';
+import { Button } from '../components/ui/Button';
 import { useSubjects } from '../hooks/useSubjects';
 
 export const ChapterPage: React.FC = () => {
@@ -10,27 +16,58 @@ export const ChapterPage: React.FC = () => {
 
   if (!data) {
     return (
-      <div className="py-12 text-center">
-        <h2 className="text-xl font-bold">Chapter not found</h2>
-        <Link to="/" className="text-primary hover:underline mt-2 inline-block">
-          Return Home
-        </Link>
-      </div>
+      <PageShell>
+        <Breadcrumb
+          items={[
+            { label: 'Subject', to: `/subjects/${subjectId || ''}` },
+            { label: 'Chapter Not Found' },
+          ]}
+        />
+        <EmptyState
+          icon={HelpCircle}
+          title="Chapter Not Found"
+          description={`We could not locate chapter "${chapterId}" in subject "${subjectId}".`}
+          actions={[
+            {
+              label: 'Return to Subject',
+              icon: ArrowLeft,
+              onClick: () => window.location.assign(`/subjects/${subjectId || ''}`),
+              variant: 'primary',
+            },
+          ]}
+        />
+      </PageShell>
     );
   }
 
   const { subject, chapter } = data;
 
   return (
-    <div className="space-y-4">
-      <Link to={`/subjects/${subject.id}`} className="text-sm text-primary hover:underline">
-        &larr; Back to {subject.name}
-      </Link>
-      <h1 className="text-2xl font-bold">{chapter.name}</h1>
-      <p className="text-sm text-muted-foreground">{chapter.description}</p>
-      <div className="text-sm text-primary font-medium">
-        {chapter.questions.length} Questions
-      </div>
-    </div>
+    <PageShell>
+      {/* Breadcrumb navigation */}
+      <Breadcrumb
+        items={[
+          { label: subject.name, to: `/subjects/${subject.id}` },
+          { label: chapter.name },
+        ]}
+      />
+
+      {/* Header */}
+      <PageHeader
+        title={chapter.name}
+        subtitle={chapter.description}
+        icon={<span className="text-2xl select-none">{subject.icon}</span>}
+      >
+        <Link to={`/subjects/${subject.id}`}>
+          <Button variant="outline" size="sm" className="gap-1.5">
+            <ArrowLeft className="h-3.5 w-3.5" />
+            <span>Back to {subject.name}</span>
+          </Button>
+        </Link>
+      </PageHeader>
+
+      {/* Serial Question List with Toggles */}
+      <QuestionList questions={chapter.questions} chapterName={chapter.name} />
+    </PageShell>
   );
 };

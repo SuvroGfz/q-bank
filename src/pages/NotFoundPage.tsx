@@ -1,20 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FileQuestion, Home } from 'lucide-react';
+import { PageShell } from '../components/ui/PageShell';
+import { EmptyState } from '../components/ui/EmptyState';
+import { Button } from '../components/ui/Button';
 
 export const NotFoundPage: React.FC = () => {
   return (
-    <div className="py-20 text-center space-y-4">
-      <div className="text-6xl font-extrabold text-primary">404</div>
-      <h1 className="text-2xl font-bold">Page Not Found</h1>
-      <p className="text-muted-foreground max-w-md mx-auto">
-        The page you are looking for does not exist or has been moved.
-      </p>
-      <Link
-        to="/"
-        className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
-      >
-        Go Back to Question Bank
-      </Link>
-    </div>
+    <PageShell className="py-12 sm:py-20">
+      <EmptyState
+        icon={FileQuestion}
+        title="404 — Page Not Found"
+        description="The question, chapter, or subject you are looking for does not exist in this library."
+        actions={[
+          {
+            label: 'Back to Question Bank',
+            icon: Home,
+            onClick: () => window.location.assign('/'),
+            variant: 'primary',
+          },
+        ]}
+      />
+    </PageShell>
   );
 };
