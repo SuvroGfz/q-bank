@@ -84,13 +84,53 @@
   * {
     @apply border-border;
   }
+  html {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+  }
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    min-height: 100vh;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-heading;
   }
+}
+
+/* Visible, draggable modern scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.4);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(13, 148, 136, 0.8);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(13, 148, 136, 0.8);
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
 @layer utilities {
@@ -144,7 +184,6 @@
 .katex-display {
   margin: 1.25em 0 !important;
   overflow-x: auto;
-  overflow-y: hidden;
   padding: 0.4em 0;
 }
 

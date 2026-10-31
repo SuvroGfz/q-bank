@@ -46,7 +46,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
 
   return (
     <Card
-      className="overflow-hidden border border-border shadow-sm hover:border-primary/40 transition-colors"
+      className="border border-border shadow-sm hover:border-primary/40 transition-colors"
       role="article"
       aria-labelledby={`question-title-${question.id}`}
     >
