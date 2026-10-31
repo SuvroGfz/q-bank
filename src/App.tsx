@@ -1,10 +1,24 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import { HomePage } from './pages/HomePage';
+import { SubjectPage } from './pages/SubjectPage';
+import { ChapterPage } from './pages/ChapterPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 export const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
-      <h1 className="text-3xl font-bold text-primary">QBank Scaffolded</h1>
-    </div>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/subjects/:subjectId" element={<SubjectPage />} />
+          <Route path="/subjects/:subjectId/:chapterId" element={<ChapterPage />} />
+          <Route path="/404" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate to="/404" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 
