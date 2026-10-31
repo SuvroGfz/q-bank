@@ -210,7 +210,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Desktop Sidebar */}
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 top-16 z-30 hidden flex-col border-r border-border bg-card lg:flex',
+          'fixed top-16 bottom-0 left-0 z-30 hidden flex-col border-r border-border bg-card lg:flex',
           'transition-all duration-300 ease-in-out',
           isCollapsed ? 'w-16' : 'w-60'
         )}
