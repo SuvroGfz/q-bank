@@ -14,8 +14,8 @@ export const Header: React.FC<HeaderProps> = ({ onToggleMobileSidebar }) => {
   const { user, isAuthenticated, login, logout } = useAuth();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 h-16 w-full border-b border-border bg-card/80 backdrop-blur-md transition-colors">
-      <div className="flex h-full items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="fixed top-0 inset-x-0 z-40 h-16 border-b border-border bg-card/80 backdrop-blur-md transition-colors">
+      <div className="max-w-full mx-auto px-4 sm:px-6 flex h-full items-center justify-between">
         {/* Left: Mobile hamburger & Logo */}
         <div className="flex items-center gap-3">
           <Button
