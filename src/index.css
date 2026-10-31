@@ -108,3 +108,46 @@
     display: none;
   }
 }
+
+/* KaTeX Layout, Spacing & Border Isolation */
+.katex {
+  font-size: 1.08em;
+  text-rendering: geometricPrecision;
+  line-height: normal !important;
+}
+
+/* Isolate KaTeX from Tailwind preflight border-color reset */
+.katex, .katex * {
+  border-color: currentColor !important;
+}
+
+/* Ensure fraction lines are clearly visible, correctly sized, and have vertical breathing space */
+.katex .mfrac .frac-line {
+  border-bottom-color: currentColor !important;
+  border-bottom-width: 1.5px !important;
+  min-height: 1.5px !important;
+  margin-top: 0.12em !important;
+  margin-bottom: 0.12em !important;
+}
+
+/* Give square root symbols proper margin so they never collide with fraction bars or adjacent terms */
+.katex .sqrt {
+  margin-left: 0.08em;
+  margin-right: 0.08em;
+}
+
+.katex .sqrt > .root {
+  margin-left: 0.15em;
+}
+
+/* Display math container spacing */
+.katex-display {
+  margin: 1.25em 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.4em 0;
+}
+
+.katex-display > .katex {
+  text-align: center;
+}

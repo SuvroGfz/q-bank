@@ -12,16 +12,37 @@ export interface MathTextProps {
 }
 
 /**
- * Renders text with Markdown formatting and LaTeX math support via KaTeX.
+ * Pre-processes markdown text to ensure LaTeX math syntax renders with optimal spacing:
+ * 1. Automatically converts inline \frac to \dfrac for fractions with radicals or complex terms so they don't overlap.
+ * 2. Ensures display math blocks ($$...$$) have blank lines around them for block-level typesetting.
+ */
+function normalizeMathText(text: string): string {
+  if (!text) return '';
+
+  // Ensure $$ display math blocks have newlines before and after (use callback to avoid $ substitution in JS replace)
+  let processed = text.replace(/([^\n])\s*\$\$([\s\S]*?)\$\$/g, (_match, before, math) => {
+    return `${before}\n\n$$${math}$$\n\n`;
+  });
+
+  // Convert \frac to \dfrac inside math expressions to prevent cramped overlapping in fractions with roots/powers
+  processed = processed.replace(/\\frac(?=\{)/g, '\\dfrac');
+
+  return processed;
+}
+
+/**
+ * Renders text with Markdown formatting and KaTeX math support.
  * - Inline math: $x^2 + y^2 = r^2$
  * - Display math: $$\int_{0}^{\infty} e^{-x^2} dx = \frac{\sqrt{\pi}}{2}$$
- * - Full markdown: lists, bold, italics, code blocks, tables.
+ * - Enhanced with \dfrac upgrades and Tailwind border isolation.
  */
 export const MathText: React.FC<MathTextProps> = ({
   children,
   className,
   asInline = false,
 }) => {
+  const content = React.useMemo(() => normalizeMathText(children), [children]);
+
   return (
     <div
       className={cn(
@@ -36,7 +57,7 @@ export const MathText: React.FC<MathTextProps> = ({
     >
       <Markdown
         remarkPlugins={[remarkMath]}
-        rehypePlugins={[rehypeKatex]}
+        rehypePlugins={[[rehypeKatex, { throwOnError: false, strict: false }]]}
         components={
           asInline
             ? {
@@ -45,8 +66,10 @@ export const MathText: React.FC<MathTextProps> = ({
             : undefined
         }
       >
-        {children}
+        {content}
       </Markdown>
     </div>
   );
 };
+
+

@@ -18,6 +18,7 @@ import type { Question } from '../../types';
 
 export interface QuestionCardProps {
   question: Question;
+  mathTypeName?: string;
   isAnswerOpen: boolean;
   isSolutionOpen: boolean;
   onToggleAnswer: () => void;
@@ -26,12 +27,16 @@ export interface QuestionCardProps {
 
 export const QuestionCard: React.FC<QuestionCardProps> = ({
   question,
+  mathTypeName,
   isAnswerOpen,
   isSolutionOpen,
   onToggleAnswer,
   onToggleSolution,
 }) => {
   const [copied, setCopied] = React.useState(false);
+
+  const answerPanelId = `answer-panel-${question.id}`;
+  const solutionPanelId = `solution-panel-${question.id}`;
 
   const handleCopyQuestion = () => {
     navigator.clipboard.writeText(question.question);
@@ -40,15 +45,28 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
   };
 
   return (
-    <Card className="overflow-hidden border border-border shadow-sm hover:border-primary/40 transition-colors">
+    <Card
+      className="overflow-hidden border border-border shadow-sm hover:border-primary/40 transition-colors"
+      role="article"
+      aria-labelledby={`question-title-${question.id}`}
+    >
       <CardContent className="p-5 sm:p-6 space-y-5">
-        {/* Top bar: Question Serial, Difficulty, and Copy button */}
+        {/* Top bar: Question Serial, Math Type, Difficulty, and Copy button */}
         <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-sm shadow-sm">
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <span
+              id={`question-title-${question.id}`}
+              className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground font-bold text-sm shadow-sm"
+              aria-label={`Question number ${question.serial}`}
+            >
               Q{question.serial}
             </span>
             <DifficultyBadge difficulty={question.difficulty} />
+            {mathTypeName && (
+              <span className="hidden sm:inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                {mathTypeName}
+              </span>
+            )}
           </div>
 
           <Button
@@ -57,6 +75,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
             onClick={handleCopyQuestion}
             className="text-xs text-muted-foreground hover:text-foreground h-8 px-2"
             title="Copy question text"
+            aria-label="Copy question text"
           >
             {copied ? (
               <>
@@ -88,21 +107,22 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
             size="sm"
             onClick={onToggleAnswer}
             className={cn(
-              'transition-all gap-1.5',
+              'transition-all gap-1.5 focus-visible:ring-2 focus-visible:ring-emerald-500',
               isAnswerOpen
                 ? 'bg-emerald-600 text-white hover:bg-emerald-700'
                 : 'hover:border-emerald-500/50 hover:text-emerald-600 dark:hover:text-emerald-400'
             )}
             aria-expanded={isAnswerOpen}
+            aria-controls={answerPanelId}
           >
             {isAnswerOpen ? (
               <>
-                <EyeOff className="h-4 w-4" />
+                <EyeOff className="h-4 w-4" aria-hidden="true" />
                 <span>Hide Answer</span>
               </>
             ) : (
               <>
-                <Eye className="h-4 w-4" />
+                <Eye className="h-4 w-4" aria-hidden="true" />
                 <span>Show Answer</span>
               </>
             )}
@@ -115,14 +135,18 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
             size="sm"
             onClick={onToggleSolution}
             className={cn(
-              'transition-all gap-1.5',
+              'transition-all gap-1.5 focus-visible:ring-2 focus-visible:ring-amber-500',
               isSolutionOpen
                 ? 'bg-amber-600 text-white hover:bg-amber-700'
                 : 'hover:border-amber-500/50 hover:text-amber-600 dark:hover:text-amber-400'
             )}
             aria-expanded={isSolutionOpen}
+            aria-controls={solutionPanelId}
           >
-            <Lightbulb className={cn('h-4 w-4', isSolutionOpen ? 'text-white' : 'text-amber-500')} />
+            <Lightbulb
+              className={cn('h-4 w-4', isSolutionOpen ? 'text-white' : 'text-amber-500')}
+              aria-hidden="true"
+            />
             <span>{isSolutionOpen ? 'Hide Solution' : 'Show Solution'}</span>
           </Button>
         </div>
@@ -131,6 +155,9 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
         <AnimatePresence>
           {isAnswerOpen && (
             <motion.div
+              id={answerPanelId}
+              role="region"
+              aria-label={`Official answer for question ${question.serial}`}
               initial={{ opacity: 0, height: 0, y: -6 }}
               animate={{ opacity: 1, height: 'auto', y: 0 }}
               exit={{ opacity: 0, height: 0, y: -6 }}
@@ -154,6 +181,9 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
         <AnimatePresence>
           {isSolutionOpen && (
             <motion.div
+              id={solutionPanelId}
+              role="region"
+              aria-label={`Step-by-step solution for question ${question.serial}`}
               initial={{ opacity: 0, height: 0, y: -6 }}
               animate={{ opacity: 1, height: 'auto', y: 0 }}
               exit={{ opacity: 0, height: 0, y: -6 }}
@@ -175,7 +205,7 @@ export const QuestionCard: React.FC<QuestionCardProps> = ({
 
         {/* Tags Footer */}
         {question.tags && question.tags.length > 0 && (
-          <div className="flex flex-wrap items-center gap-1.5 pt-1">
+          <div className="flex flex-wrap items-center gap-1.5 pt-1" aria-label="Question tags">
             {question.tags.map((tag) => (
               <span
                 key={tag}

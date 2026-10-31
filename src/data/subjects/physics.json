@@ -8,10 +8,34 @@
       "id": "mechanics",
       "name": "Classical Mechanics",
       "description": "Kinematics, Newton's laws of motion, work, energy, momentum, and gravitation.",
+      "mathTypes": [
+        {
+          "id": "kinematics",
+          "name": "Uniform Acceleration Kinematics",
+          "description": "Motion equations relating velocity, acceleration, displacement, and time.",
+          "formula": "v = u + at, \\quad s = ut + \\frac{1}{2}at^2",
+          "icon": "🏎️"
+        },
+        {
+          "id": "energy-work",
+          "name": "Work & Energy Conservation",
+          "description": "Mechanical energy conservation between potential and kinetic forms.",
+          "formula": "E = \\frac{1}{2}mv^2 + mgh",
+          "icon": "⚡"
+        },
+        {
+          "id": "dynamics",
+          "name": "Newtonian Dynamics & Friction",
+          "description": "Net force vector calculations, friction coefficients, and acceleration.",
+          "formula": "F_{\\text{net}} = ma, \\quad f_k = \\mu_k N",
+          "icon": "⚖️"
+        }
+      ],
       "questions": [
         {
           "id": "phys-mech-001",
           "serial": 1,
+          "typeId": "kinematics",
           "question": "A car accelerates uniformly from rest to a speed of $20\\text{ m/s}$ in $5\\text{ seconds}$. Calculate the acceleration $a$ and the distance $s$ traveled during this time.",
           "answer": "$$a = 4\\text{ m/s}^2, \\quad s = 50\\text{ m}$$",
           "solution": "**Step 1:** Use first kinematic equation $v = u + at$ where $u = 0, v = 20\\text{ m/s}, t = 5\\text{ s}$:\n$$20 = 0 + a(5) \\implies a = \\frac{20}{5} = 4\\text{ m/s}^2$$\n\n**Step 2:** Use the displacement formula $s = ut + \\frac{1}{2}at^2$:\n$$s = 0(5) + \\frac{1}{2}(4)(5^2) = 2 \\times 25 = 50\\text{ m}$$\n\nAlternative check with $v^2 = u^2 + 2as$:\n$$(20)^2 = 0 + 2(4)s \\implies 400 = 8s \\implies s = 50\\text{ m}$$.",
@@ -21,6 +45,7 @@
         {
           "id": "phys-mech-002",
           "serial": 2,
+          "typeId": "energy-work",
           "question": "A mass of $m = 2\\text{ kg}$ is dropped from a height of $h = 20\\text{ m}$. Neglecting air resistance, calculate its kinetic energy $K$ just before hitting the ground. (Take $g = 9.8\\text{ m/s}^2$)",
           "answer": "$$K = 392\\text{ Joules}$$",
           "solution": "**Step 1:** By the law of conservation of mechanical energy:\n$$E_{\\text{initial}} = E_{\\text{final}}$$\n$$\\text{PE}_{\\text{initial}} + \\text{KE}_{\\text{initial}} = \\text{PE}_{\\text{final}} + \\text{KE}_{\\text{final}}$$\n\n**Step 2:** Since the object starts from rest, $\\text{KE}_{\\text{initial}} = 0$, and at ground level $\\text{PE}_{\\text{final}} = 0$:\n$$K = mgh$$\n$$K = (2\\text{ kg}) \\times (9.8\\text{ m/s}^2) \\times (20\\text{ m}) = 392\\text{ J}$$",
@@ -30,6 +55,7 @@
         {
           "id": "phys-mech-003",
           "serial": 3,
+          "typeId": "dynamics",
           "question": "A block of mass $m = 5\\text{ kg}$ rests on a rough horizontal surface with coefficient of kinetic friction $\\mu_k = 0.3$. A horizontal force of $F = 25\\text{ N}$ is applied. Find the resulting acceleration of the block. (Take $g = 9.8\\text{ m/s}^2$)",
           "answer": "$$a = 2.06\\text{ m/s}^2$$",
           "solution": "**Step 1:** Calculate normal force $N$:\n$$N = mg = 5 \\times 9.8 = 49\\text{ N}$$\n\n**Step 2:** Compute frictional force $f_k$:\n$$f_k = \\mu_k N = 0.3 \\times 49 = 14.7\\text{ N}$$\n\n**Step 3:** Determine net force $F_{\\text{net}}$:\n$$F_{\\text{net}} = F - f_k = 25 - 14.7 = 10.3\\text{ N}$$\n\n**Step 4:** Calculate acceleration by Newton's 2nd Law ($F_{\\text{net}} = ma$):\n$$a = \\frac{F_{\\text{net}}}{m} = \\frac{10.3}{5} = 2.06\\text{ m/s}^2$$",
@@ -42,10 +68,27 @@
       "id": "thermodynamics",
       "name": "Thermodynamics",
       "description": "Ideal gas laws, heat transfer, laws of thermodynamics, and thermal efficiency.",
+      "mathTypes": [
+        {
+          "id": "gas-laws",
+          "name": "Gas Laws & State Variables",
+          "description": "Combined gas law relationships across pressure, volume, and temperature.",
+          "formula": "\\frac{P_1 V_1}{T_1} = \\frac{P_2 V_2}{T_2}",
+          "icon": "🌡️"
+        },
+        {
+          "id": "first-law",
+          "name": "First Law of Thermodynamics",
+          "description": "Conservation of energy between heat, work, and internal energy.",
+          "formula": "\\Delta U = Q - W",
+          "icon": "🔥"
+        }
+      ],
       "questions": [
         {
           "id": "phys-thermo-001",
           "serial": 1,
+          "typeId": "gas-laws",
           "question": "An ideal gas occupies $V_1 = 2\\text{ L}$ at pressure $P_1 = 3\\text{ atm}$ and temperature $T_1 = 300\\text{ K}$. If the volume expands to $V_2 = 4\\text{ L}$ while temperature increases to $T_2 = 400\\text{ K}$, what is the final pressure $P_2$?",
           "answer": "$$P_2 = 2\\text{ atm}$$",
           "solution": "**Step 1:** Apply the combined ideal gas law:\n$$\\frac{P_1 V_1}{T_1} = \\frac{P_2 V_2}{T_2}$$\n\n**Step 2:** Rearrange for $P_2$:\n$$P_2 = P_1 \\times \\left(\\frac{V_1}{V_2}\\right) \\times \\left(\\frac{T_2}{T_1}\\right)$$\n\n**Step 3:** Substitute given values:\n$$P_2 = 3 \\times \\left(\\frac{2}{4}\\right) \\times \\left(\\frac{400}{300}\\right)$$\n$$P_2 = 3 \\times \\frac{1}{2} \\times \\frac{4}{3} = 2\\text{ atm}$$",
@@ -55,6 +98,7 @@
         {
           "id": "phys-thermo-002",
           "serial": 2,
+          "typeId": "first-law",
           "question": "A system absorbs $Q = 500\\text{ J}$ of heat from its surroundings while performing $W = 200\\text{ J}$ of work on the surroundings. What is the change in the system's internal energy $\\Delta U$?",
           "answer": "$$\\Delta U = +300\\text{ Joules}$$",
           "solution": "**Step 1:** State the First Law of Thermodynamics:\n$$\\Delta U = Q - W$$\n\n**Step 2:** Check sign conventions:\n- Heat absorbed by the system: $Q = +500\\text{ J}$\n- Work done by the system: $W = +200\\text{ J}$\n\n**Step 3:** Compute $\\Delta U$:\n$$\\Delta U = 500 - 200 = 300\\text{ J}$$",
@@ -67,10 +111,27 @@
       "id": "optics",
       "name": "Optics & Light",
       "description": "Geometric optics, Snell's law of refraction, thin lenses, and wave phenomena.",
+      "mathTypes": [
+        {
+          "id": "refraction",
+          "name": "Snell's Law & Refraction",
+          "description": "Index of refraction and boundary angle transformations.",
+          "formula": "n_1 \\sin(\\theta_1) = n_2 \\sin(\\theta_2)",
+          "icon": "🔍"
+        },
+        {
+          "id": "lenses",
+          "name": "Thin Lens Equation & Optics",
+          "description": "Focal lengths, image distance, and magnification conventions.",
+          "formula": "\\frac{1}{f} = \\frac{1}{v} - \\frac{1}{u}",
+          "icon": "👓"
+        }
+      ],
       "questions": [
         {
           "id": "phys-opt-001",
           "serial": 1,
+          "typeId": "refraction",
           "question": "Light travels from air ($n_1 = 1.0$) into crown glass ($n_2 = 1.5$) with an angle of incidence $\\theta_1 = 30^\\circ$. Find the angle of refraction $\\theta_2$.",
           "answer": "$$\\theta_2 = \\arcsin\\left(\\frac{1}{3}\\right) \\approx 19.47^\\circ$$",
           "solution": "**Step 1:** State Snell's Law:\n$$n_1 \\sin(\\theta_1) = n_2 \\sin(\\theta_2)$$\n\n**Step 2:** Substitute values:\n$$1.0 \\times \\sin(30^\\circ) = 1.5 \\times \\sin(\\theta_2)$$\n$$1.0 \\times 0.5 = 1.5 \\times \\sin(\\theta_2)$$\n$$\\sin(\\theta_2) = \\frac{0.5}{1.5} = \\frac{1}{3}$$\n\n**Step 3:** Compute angle:\n$$\\theta_2 = \\arcsin(0.3333) \\approx 19.47^\\circ$$",
@@ -80,6 +141,7 @@
         {
           "id": "phys-opt-002",
           "serial": 2,
+          "typeId": "lenses",
           "question": "An object is placed $20\\text{ cm}$ in front of a converging thin lens with focal length $f = +10\\text{ cm}$. Find the image distance $v$ and the magnification $m$.",
           "answer": "$$v = +20\\text{ cm}, \\quad m = -1 \\text{ (Real, Inverted, Same Size)}$$",
           "solution": "**Step 1:** Use the thin lens formula $\\frac{1}{f} = \\frac{1}{v} - \\frac{1}{u}$ (Cartesian sign convention: $u = -20\\text{ cm}$, $f = +10\\text{ cm}$):\n$$\\frac{1}{v} = \\frac{1}{f} + \\frac{1}{u}$$\n$$\\frac{1}{v} = \\frac{1}{10} + \\frac{1}{-20} = \\frac{2 - 1}{20} = \\frac{1}{20}$$\n$$v = +20\\text{ cm}$$\n\n**Step 2:** Calculate linear magnification $m = \\frac{v}{u}$:\n$$m = \\frac{20}{-20} = -1$$\n\nThe image is formed $20\\text{ cm}$ behind the lens, real, inverted, and equal in height to the object.",
@@ -92,10 +154,27 @@
       "id": "electricity",
       "name": "Electricity & Circuits",
       "description": "Coulomb's law, electric fields, Ohm's law, and series-parallel resistor networks.",
+      "mathTypes": [
+        {
+          "id": "circuits",
+          "name": "Resistor Networks & Ohm's Law",
+          "description": "Series and parallel equivalent resistances, voltages, and currents.",
+          "formula": "V = IR, \\quad R_p = \\frac{R_1 R_2}{R_1 + R_2}",
+          "icon": "⚡"
+        },
+        {
+          "id": "electrostatics",
+          "name": "Coulomb's Law & Point Charges",
+          "description": "Electrostatic forces, vacuum permittivity, and attractive/repulsive charges.",
+          "formula": "F = k_e \\frac{|q_1 q_2|}{r^2}",
+          "icon": "🧲"
+        }
+      ],
       "questions": [
         {
           "id": "phys-elec-001",
           "serial": 1,
+          "typeId": "circuits",
           "question": "Two resistors $R_1 = 6\\,\\Omega$ and $R_2 = 12\\,\\Omega$ are connected in parallel, and this combination is connected in series with $R_3 = 4\\,\\Omega$ across a $24\\text{ V}$ battery. Find the total equivalent resistance $R_{\\text{eq}}$ and total current $I$.",
           "answer": "$$R_{\\text{eq}} = 8\\,\\Omega, \\quad I = 3\\text{ A}$$",
           "solution": "**Step 1:** Compute the parallel equivalent of $R_1$ and $R_2$:\n$$R_p = \\frac{R_1 R_2}{R_1 + R_2} = \\frac{6 \\times 12}{6 + 12} = \\frac{72}{18} = 4\\,\\Omega$$\n\n**Step 2:** Add series resistor $R_3$:\n$$R_{\\text{eq}} = R_p + R_3 = 4\\,\\Omega + 4\\,\\Omega = 8\\,\\Omega$$\n\n**Step 3:** Use Ohm's Law $V = I R_{\\text{eq}}$:\n$$I = \\frac{V}{R_{\\text{eq}}} = \\frac{24\\text{ V}}{8\\,\\Omega} = 3\\text{ A}$$",
@@ -105,6 +184,7 @@
         {
           "id": "phys-elec-002",
           "serial": 2,
+          "typeId": "electrostatics",
           "question": "Two point charges $q_1 = +2\\,\\mu\\text{C}$ and $q_2 = -3\\,\\mu\\text{C}$ are separated in vacuum by a distance of $r = 0.3\\text{ m}$. What is the electrostatic force between them? (Use $k_e = 8.99 \\times 10^9\\text{ N}\\cdot\\text{m}^2/\\text{C}^2$)",
           "answer": "$$F \\approx 0.60\\text{ N (Attractive)}$$",
           "solution": "**Step 1:** State Coulomb's Law:\n$$F = k_e \\frac{|q_1 q_2|}{r^2}$$\n\n**Step 2:** Convert microcoulombs to Coulombs:\n- $q_1 = 2 \\times 10^{-6}\\text{ C}$\n- $q_2 = 3 \\times 10^{-6}\\text{ C}$\n- $r = 0.3\\text{ m} \\implies r^2 = 0.09\\text{ m}^2$\n\n**Step 3:** Calculate force:\n$$F = (8.99 \\times 10^9) \\times \\frac{(2 \\times 10^{-6})(3 \\times 10^{-6})}{0.09}$$\n$$F = 8.99 \\times 10^9 \\times \\frac{6 \\times 10^{-12}}{0.09} = \\frac{5.394 \\times 10^{-2}}{0.09} \\approx 0.599\\text{ N} \\approx 0.60\\text{ N}$$\n\nSince the charges have opposite signs, the force is attractive.",

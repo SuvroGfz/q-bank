@@ -8,19 +8,44 @@
       "id": "algebra",
       "name": "Algebra & Polynomials",
       "description": "Equations, polynomial factoring, inequalities, and logarithmic transformations.",
+      "mathTypes": [
+        {
+          "id": "quadratic",
+          "name": "Quadratic Equations",
+          "description": "2nd-degree polynomials with discriminant analysis and roots.",
+          "formula": "ax^2 + bx + c = 0",
+          "icon": "⚡"
+        },
+        {
+          "id": "linear-systems",
+          "name": "Linear Systems",
+          "description": "Simultaneous equations solved via substitution or elimination.",
+          "formula": "a_1 x + b_1 y = c_1",
+          "icon": "📐"
+        },
+        {
+          "id": "logarithms",
+          "name": "Logarithmic Functions",
+          "description": "Domain-restricted log laws and exponential transformations.",
+          "formula": "\\log_b(x) + \\log_b(y) = \\log_b(xy)",
+          "icon": "📊"
+        }
+      ],
       "questions": [
         {
           "id": "math-alg-001",
           "serial": 1,
+          "typeId": "quadratic",
           "question": "Solve the quadratic equation: $$2x^2 - 7x + 3 = 0$$",
           "answer": "$$x = 3 \\quad \\text{or} \\quad x = \\frac{1}{2}$$",
-          "solution": "We use the quadratic formula: $$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$\n\n**Step 1:** Identify coefficients:\n- $a = 2$\n- $b = -7$\n- $c = 3$\n\n**Step 2:** Compute the discriminant $\\Delta$:\n$$\\Delta = (-7)^2 - 4(2)(3) = 49 - 24 = 25$$\n\n**Step 3:** Calculate roots:\n$$x = \\frac{7 \\pm \\sqrt{25}}{2(2)} = \\frac{7 \\pm 5}{4}$$\n\n- Root 1: $x_1 = \\frac{7 + 5}{4} = \\frac{12}{4} = 3$\n- Root 2: $x_2 = \\frac{7 - 5}{4} = \\frac{2}{4} = \\frac{1}{2}$",
+          "solution": "We use the quadratic formula:\n\n$$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$\n\n**Step 1:** Identify coefficients:\n- $a = 2$\n- $b = -7$\n- $c = 3$\n\n**Step 2:** Compute the discriminant $\\Delta$:\n$$\\Delta = (-7)^2 - 4(2)(3) = 49 - 24 = 25$$\n\n**Step 3:** Calculate roots:\n$$x = \\frac{7 \\pm \\sqrt{25}}{2(2)} = \\frac{7 \\pm 5}{4}$$\n\n- Root 1: $x_1 = \\frac{7 + 5}{4} = \\frac{12}{4} = 3$\n- Root 2: $x_2 = \\frac{7 - 5}{4} = \\frac{2}{4} = \\frac{1}{2}$",
           "difficulty": "easy",
           "tags": ["quadratic", "algebra", "factoring"]
         },
         {
           "id": "math-alg-002",
           "serial": 2,
+          "typeId": "linear-systems",
           "question": "Solve the system of linear equations:\n$$\\begin{cases} 2x + 3y = 13 \\\\ x - y = -1 \\end{cases}$$",
           "answer": "$$x = 2, \\quad y = 3$$",
           "solution": "**Step 1:** From equation (2), express $x$ in terms of $y$:\n$$x = y - 1$$\n\n**Step 2:** Substitute into equation (1):\n$$2(y - 1) + 3y = 13$$\n$$2y - 2 + 3y = 13$$\n$$5y = 15 \\implies y = 3$$\n\n**Step 3:** Solve for $x$:\n$$x = 3 - 1 = 2$$\n\nVerification: $2(2) + 3(3) = 4 + 9 = 13$ (Checks out!).",
@@ -30,6 +55,7 @@
         {
           "id": "math-alg-003",
           "serial": 3,
+          "typeId": "logarithms",
           "question": "Find all real solutions to the logarithmic equation:\n$$\\log_2(x) + \\log_2(x - 2) = 3$$",
           "answer": "$$x = 4$$",
           "solution": "**Step 1:** Apply logarithmic product rule: $\\log_b(A) + \\log_b(B) = \\log_b(AB)$:\n$$\\log_2(x(x - 2)) = 3$$\n\n**Step 2:** Convert to exponential form:\n$$x(x - 2) = 2^3 = 8$$\n$$x^2 - 2x - 8 = 0$$\n\n**Step 3:** Factor the quadratic:\n$$(x - 4)(x + 2) = 0$$\nThis gives candidates $x = 4$ and $x = -2$.\n\n**Step 4:** Check the domain constraints:\nThe original logs require $x > 0$ and $x - 2 > 0 \\implies x > 2$.\nTherefore, $x = -2$ is extraneous. The only valid solution is $x = 4$.",
@@ -42,10 +68,27 @@
       "id": "geometry",
       "name": "Geometry & Mensuration",
       "description": "Planar shapes, circles, Pythagorean theorems, surface areas, and solid volumes.",
+      "mathTypes": [
+        {
+          "id": "triangles",
+          "name": "Right Triangles & Pythagoras",
+          "description": "Hypotenuse, side ratios, and planar triangle area calculations.",
+          "formula": "a^2 + b^2 = c^2",
+          "icon": "📐"
+        },
+        {
+          "id": "solids",
+          "name": "3D Solid Geometry",
+          "description": "Volumes and surface areas of cylinders, spheres, and cones.",
+          "formula": "V = \\pi r^2 h",
+          "icon": "🧊"
+        }
+      ],
       "questions": [
         {
           "id": "math-geo-001",
           "serial": 1,
+          "typeId": "triangles",
           "question": "A right-angled triangle has legs of length $a = 6\\text{ cm}$ and $b = 8\\text{ cm}$. Find the length of the hypotenuse $c$ and its area.",
           "answer": "$$c = 10\\text{ cm}, \\quad \\text{Area} = 24\\text{ cm}^2$$",
           "solution": "**Step 1:** Apply the Pythagorean theorem:\n$$c^2 = a^2 + b^2$$\n$$c^2 = 6^2 + 8^2 = 36 + 64 = 100$$\n$$c = \\sqrt{100} = 10\\text{ cm}$$\n\n**Step 2:** Calculate the triangle area:\n$$\\text{Area} = \\frac{1}{2} \\times \\text{base} \\times \\text{height} = \\frac{1}{2} \\times 6 \\times 8 = 24\\text{ cm}^2$$",
@@ -55,6 +98,7 @@
         {
           "id": "math-geo-002",
           "serial": 2,
+          "typeId": "solids",
           "question": "Calculate the total surface area and volume of a cylinder with radius $r = 7\\text{ cm}$ and height $h = 10\\text{ cm}$. (Use $\\pi \\approx \\frac{22}{7}$)",
           "answer": "$$\\text{Volume} = 1540\\text{ cm}^3, \\quad \\text{Surface Area} = 748\\text{ cm}^2$$",
           "solution": "**Step 1:** Calculate Volume:\n$$V = \\pi r^2 h = \\frac{22}{7} \\times (7)^2 \\times 10 = \\frac{22}{7} \\times 49 \\times 10 = 1540\\text{ cm}^3$$\n\n**Step 2:** Calculate Total Surface Area ($A = 2\\pi r h + 2\\pi r^2$):\n$$A = 2\\pi r (h + r)$$\n$$A = 2 \\times \\frac{22}{7} \\times 7 \\times (10 + 7) = 44 \\times 17 = 748\\text{ cm}^2$$",
@@ -67,10 +111,27 @@
       "id": "trigonometry",
       "name": "Trigonometry",
       "description": "Trigonometric ratios, identities, equations, and properties of triangles.",
+      "mathTypes": [
+        {
+          "id": "trig-equations",
+          "name": "Trigonometric Equations",
+          "description": "Unit circle angle solutions and periodic interval evaluations.",
+          "formula": "\\sin(\\theta) = k",
+          "icon": "🔄"
+        },
+        {
+          "id": "identities",
+          "name": "Trigonometric Identities",
+          "description": "Double-angle formulas, Pythagorean identities, and simplifications.",
+          "formula": "\\sin(2\\theta) = 2\\sin(\\theta)\\cos(\\theta)",
+          "icon": "✨"
+        }
+      ],
       "questions": [
         {
           "id": "math-trig-001",
           "serial": 1,
+          "typeId": "trig-equations",
           "question": "Find all values of $\\theta \\in [0, 2\\pi)$ that satisfy the equation:\n$$2\\sin(\\theta) - 1 = 0$$",
           "answer": "$$\\theta = \\frac{\\pi}{6}, \\quad \\theta = \\frac{5\\pi}{6}$$",
           "solution": "**Step 1:** Rearrange to isolate $\\sin(\\theta)$:\n$$2\\sin(\\theta) = 1 \\implies \\sin(\\theta) = \\frac{1}{2}$$\n\n**Step 2:** Determine the reference angle:\nThe principal angle where $\\sin(\\alpha) = \\frac{1}{2}$ in the first quadrant is $\\alpha = \\frac{\\pi}{6}$ ($30^\\circ$).\n\n**Step 3:** Find angles in interval $[0, 2\\pi)$:\nSince sine is positive in Quadrants I and II:\n- Quadrant I: $\\theta_1 = \\frac{\\pi}{6}$\n- Quadrant II: $\\theta_2 = \\pi - \\frac{\\pi}{6} = \\frac{5\\pi}{6}$",
@@ -80,6 +141,7 @@
         {
           "id": "math-trig-002",
           "serial": 2,
+          "typeId": "identities",
           "question": "Simplify the trigonometric expression:\n$$\\frac{\\sin(2\\theta)}{1 + \\cos(2\\theta)}$$",
           "answer": "$$\\tan(\\theta)$$",
           "solution": "**Step 1:** Recall the double-angle formulas:\n$$\\sin(2\\theta) = 2\\sin(\\theta)\\cos(\\theta)$$\n$$\\cos(2\\theta) = 2\\cos^2(\\theta) - 1$$\n\n**Step 2:** Substitute into denominator:\n$$1 + \\cos(2\\theta) = 1 + (2\\cos^2(\\theta) - 1) = 2\\cos^2(\\theta)$$\n\n**Step 3:** Substitute both into the fraction:\n$$\\frac{2\\sin(\\theta)\\cos(\\theta)}{2\\cos^2(\\theta)}$$\n\n**Step 4:** Cancel common factor $2\\cos(\\theta)$:\n$$\\frac{\\sin(\\theta)}{\\cos(\\theta)} = \\tan(\\theta)$$",
@@ -92,10 +154,34 @@
       "id": "calculus",
       "name": "Calculus",
       "description": "Limits, derivatives, tangent lines, integrals, and fundamental theorems of calculus.",
+      "mathTypes": [
+        {
+          "id": "limits",
+          "name": "Limits & Continuity",
+          "description": "Fundamental limit laws, trigonometric limits, and indeterminate forms.",
+          "formula": "\\lim_{x \\to 0} \\frac{\\sin(x)}{x} = 1",
+          "icon": "🎯"
+        },
+        {
+          "id": "integration",
+          "name": "Definite Integrals",
+          "description": "Fundamental theorem of calculus and area under curves.",
+          "formula": "\\int_a^b f(x)dx = F(b) - F(a)",
+          "icon": "∫"
+        },
+        {
+          "id": "derivatives",
+          "name": "Derivatives & Extrema",
+          "description": "Critical points, second derivative tests, and optimization.",
+          "formula": "f'(x) = 0",
+          "icon": "📈"
+        }
+      ],
       "questions": [
         {
           "id": "math-calc-001",
           "serial": 1,
+          "typeId": "limits",
           "question": "Evaluate the limit: $$\\lim_{x \\to 0} \\frac{\\sin(5x)}{x}$$",
           "answer": "$$5$$",
           "solution": "**Step 1:** Recall the standard trigonometric limit: $$\\lim_{u \\to 0} \\frac{\\sin(u)}{u} = 1$$\n\n**Step 2:** Multiply numerator and denominator by $5$:\n$$\\lim_{x \\to 0} \\frac{\\sin(5x)}{x} = \\lim_{x \\to 0} 5 \\cdot \\frac{\\sin(5x)}{5x}$$\n\n**Step 3:** As $x \\to 0$, $u = 5x \\to 0$:\n$$= 5 \\cdot 1 = 5$$",
@@ -105,6 +191,7 @@
         {
           "id": "math-calc-002",
           "serial": 2,
+          "typeId": "integration",
           "question": "Find the definite integral: $$\\int_{0}^{3} (3x^2 - 4x + 2)\\,dx$$",
           "answer": "$$15$$",
           "solution": "**Step 1:** Find the antiderivative $F(x)$:\n$$F(x) = \\int (3x^2 - 4x + 2)\\,dx = x^3 - 2x^2 + 2x$$\n\n**Step 2:** Apply the Fundamental Theorem of Calculus $\\left[F(x)\\right]_0^3 = F(3) - F(0)$:\n- At $x = 3$:\n$$F(3) = (3)^3 - 2(3)^2 + 2(3) = 27 - 18 + 6 = 15$$\n- At $x = 0$:\n$$F(0) = 0$$\n\n**Step 3:** Subtract:\n$$15 - 0 = 15$$",
@@ -114,6 +201,7 @@
         {
           "id": "math-calc-003",
           "serial": 3,
+          "typeId": "derivatives",
           "question": "Find the critical points and determine local extrema of: $$f(x) = 2x^3 - 9x^2 + 12x + 1$$",
           "answer": "Local maximum at $x = 1$ with $f(1) = 6$; Local minimum at $x = 2$ with $f(2) = 5$.",
           "solution": "**Step 1:** Compute the first derivative $f'(x)$:\n$$f'(x) = 6x^2 - 18x + 12$$\n\n**Step 2:** Set $f'(x) = 0$ and factor:\n$$6(x^2 - 3x + 2) = 0$$\n$$6(x - 1)(x - 2) = 0 \\implies x = 1, \\quad x = 2$$\n\n**Step 3:** Use second derivative test ($f''(x) = 12x - 18$):\n- At $x = 1$: $f''(1) = 12(1) - 18 = -6 < 0 \\implies$ Local Maximum!\n  $$f(1) = 2(1)^3 - 9(1)^2 + 12(1) + 1 = 6$$\n- At $x = 2$: $f''(2) = 12(2) - 18 = 6 > 0 \\implies$ Local Minimum!\n  $$f(2) = 2(8) - 9(4) + 12(2) + 1 = 16 - 36 + 24 + 1 = 5$$",
@@ -126,10 +214,27 @@
       "id": "probability",
       "name": "Probability & Combinatorics",
       "description": "Counting principles, permutations, combinations, and conditional probability distributions.",
+      "mathTypes": [
+        {
+          "id": "sample-space",
+          "name": "Sample Space & Events",
+          "description": "Discrete probability distributions and classical favorable outcome analysis.",
+          "formula": "P(E) = \\frac{n(E)}{n(S)}",
+          "icon": "🎲"
+        },
+        {
+          "id": "combinatorics",
+          "name": "Combinations & Counting",
+          "description": "Factorial selection rules and unordered subsets.",
+          "formula": "\\binom{n}{k} = \\frac{n!}{k!(n-k)!}",
+          "icon": "🔢"
+        }
+      ],
       "questions": [
         {
           "id": "math-prob-001",
           "serial": 1,
+          "typeId": "sample-space",
           "question": "Two fair 6-sided dice are rolled simultaneously. What is the probability that the sum of the numbers is $7$?",
           "answer": "$$\\frac{1}{6}$$",
           "solution": "**Step 1:** Total number of outcomes when rolling two dice:\n$$N = 6 \\times 6 = 36$$\n\n**Step 2:** List outcomes where the sum equals $7$:\n$$(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)$$\nNumber of favorable outcomes $= 6$.\n\n**Step 3:** Calculate probability:\n$$P(\\text{Sum} = 7) = \\frac{6}{36} = \\frac{1}{6}$$",
@@ -139,6 +244,7 @@
         {
           "id": "math-prob-002",
           "serial": 2,
+          "typeId": "combinatorics",
           "question": "In a group of 10 students, a committee of 4 members is to be chosen. How many distinct committees can be formed?",
           "answer": "$$210$$",
           "solution": "**Step 1:** The order of selection does not matter, so we use combinations $\\binom{n}{k} = \\frac{n!}{k!(n-k)!}$ with $n = 10, k = 4$:\n$$\\binom{10}{4} = \\frac{10!}{4! \\cdot 6!}$$\n\n**Step 2:** Simplify the fraction:\n$$\\binom{10}{4} = \\frac{10 \\times 9 \\times 8 \\times 7}{4 \\times 3 \\times 2 \\times 1}$$\n$$\\binom{10}{4} = \\frac{5040}{24} = 210$$",

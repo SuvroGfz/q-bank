@@ -1,5 +1,13 @@
 export type Difficulty = 'easy' | 'medium' | 'hard';
 
+export interface MathTypeCategory {
+  id: string;
+  name: string;
+  description: string;
+  formula?: string;
+  icon?: string;
+}
+
 export interface Question {
   id: string;
   serial: number;
@@ -7,6 +15,7 @@ export interface Question {
   answer: string;
   solution: string;
   difficulty: Difficulty;
+  typeId?: string; // References MathTypeCategory.id
   tags: string[];
 }
 
@@ -14,6 +23,7 @@ export interface Chapter {
   id: string;
   name: string;
   description: string;
+  mathTypes?: MathTypeCategory[];
   questions: Question[];
 }
 

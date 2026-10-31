@@ -13,14 +13,23 @@ import { QuestionCard } from './QuestionCard';
 import { Button } from '../ui/Button';
 import { SearchInput } from '../ui/PageShell';
 import { EmptyState } from '../ui/EmptyState';
-import type { Question, Difficulty } from '../../types';
+import type { Question, Difficulty, MathTypeCategory } from '../../types';
 
 export interface QuestionListProps {
   questions: Question[];
   chapterName: string;
+  mathTypes?: MathTypeCategory[];
+  selectedTypeId?: string | null;
+  onClearTypeFilter?: () => void;
 }
 
-export const QuestionList: React.FC<QuestionListProps> = ({ questions, chapterName }) => {
+export const QuestionList: React.FC<QuestionListProps> = ({
+  questions,
+  chapterName,
+  mathTypes = [],
+  selectedTypeId,
+  onClearTypeFilter,
+}) => {
   const [search, setSearch] = useState('');
   const [difficultyFilter, setDifficultyFilter] = useState<Difficulty | 'all'>('all');
 
@@ -28,9 +37,23 @@ export const QuestionList: React.FC<QuestionListProps> = ({ questions, chapterNa
   const [answersOpen, setAnswersOpen] = useState<Record<string, boolean>>({});
   const [solutionsOpen, setSolutionsOpen] = useState<Record<string, boolean>>({});
 
+  // Lookup math type name by typeId
+  const mathTypeMap = useMemo(() => {
+    const map: Record<string, string> = {};
+    for (const mt of mathTypes) {
+      map[mt.id] = mt.name;
+    }
+    return map;
+  }, [mathTypes]);
+
   // Filtered questions
   const filteredQuestions = useMemo(() => {
     return questions.filter((q) => {
+      // Math type category filter
+      if (selectedTypeId && q.typeId !== selectedTypeId) {
+        return false;
+      }
+
       const matchesDifficulty =
         difficultyFilter === 'all' || q.difficulty === difficultyFilter;
 
@@ -45,7 +68,7 @@ export const QuestionList: React.FC<QuestionListProps> = ({ questions, chapterNa
 
       return matchesQuestion || matchesAnswer || matchesSolution || matchesTags;
     });
-  }, [questions, search, difficultyFilter]);
+  }, [questions, search, difficultyFilter, selectedTypeId]);
 
   // Bulk toggle calculations
   const allAnswersCurrentlyOpen = useMemo(() => {
@@ -87,6 +110,7 @@ export const QuestionList: React.FC<QuestionListProps> = ({ questions, chapterNa
   const resetFilters = () => {
     setSearch('');
     setDifficultyFilter('all');
+    if (onClearTypeFilter) onClearTypeFilter();
   };
 
   const containerVariants = {
@@ -192,6 +216,7 @@ export const QuestionList: React.FC<QuestionListProps> = ({ questions, chapterNa
             <motion.div key={q.id} variants={itemVariants}>
               <QuestionCard
                 question={q}
+                mathTypeName={q.typeId ? mathTypeMap[q.typeId] : undefined}
                 isAnswerOpen={!!answersOpen[q.id]}
                 isSolutionOpen={!!solutionsOpen[q.id]}
                 onToggleAnswer={() => toggleSingleAnswer(q.id)}
