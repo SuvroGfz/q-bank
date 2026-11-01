@@ -17,6 +17,8 @@ export interface Question {
   difficulty: Difficulty;
   typeId?: string; // References MathTypeCategory.id
   tags: string[];
+  /** IDs of linked artboard drawings */
+  drawingIds?: string[];
 }
 
 export interface Chapter {
@@ -67,3 +69,21 @@ export interface AuthContextType {
 }
 
 export type Theme = 'light' | 'dark';
+
+// ── Artboard / Drawing ───────────────────────────────────────
+
+export interface ArtboardDrawing {
+  id: string;
+  /** Human-readable label for the drawing */
+  title: string;
+  /** Excalidraw scene elements (serialized JSON) */
+  elements: unknown[];
+  /** Excalidraw app state subset (background, zoom, scroll) */
+  appState?: Record<string, unknown>;
+  /** Excalidraw files (embedded images / assets) */
+  files?: Record<string, unknown>;
+  /** Base64 PNG thumbnail for list previews */
+  thumbnailDataUrl?: string;
+  createdAt: string;
+  updatedAt: string;
+}

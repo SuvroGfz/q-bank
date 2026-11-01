@@ -8,6 +8,7 @@ import {
   Sparkles,
   Layers,
   GraduationCap,
+  PenTool,
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { useSubjects } from '../../hooks/useSubjects';
@@ -140,6 +141,14 @@ const SidebarContent: React.FC<{
           label="All Subjects"
           icon={<Layers size={18} />}
           badge={stats.totalSubjects}
+          isCollapsed={isCollapsed}
+          onClick={onItemClick}
+        />
+
+        <SidebarNavItem
+          to="/artboard"
+          label="Artboard"
+          icon={<PenTool size={18} />}
           isCollapsed={isCollapsed}
           onClick={onItemClick}
         />

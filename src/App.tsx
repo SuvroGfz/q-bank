@@ -6,6 +6,7 @@ import { HomePage } from './pages/HomePage';
 import { SubjectPage } from './pages/SubjectPage';
 import { ChapterPage } from './pages/ChapterPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { ArtboardPage } from './pages/ArtboardPage';
 
 export const App: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ export const App: React.FC = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/subjects/:subjectId" element={<SubjectPage />} />
             <Route path="/subjects/:subjectId/:chapterId" element={<ChapterPage />} />
+            <Route path="/artboard" element={<ArtboardPage />} />
             <Route path="/404" element={<NotFoundPage />} />
             <Route path="*" element={<Navigate to="/404" replace />} />
           </Routes>
