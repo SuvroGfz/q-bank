@@ -19,15 +19,44 @@ export interface MathTextProps {
 function normalizeMathText(text: string): string {
   if (!text) return '';
 
-  // Ensure $$ display math blocks have newlines before and after (use callback to avoid $ substitution in JS replace)
-  let processed = text.replace(/([^\n])\s*\$\$([\s\S]*?)\$\$/g, (_match, before, math) => {
-    return `${before}\n\n$$${math}$$\n\n`;
-  });
+  let processed = text;
 
   // Convert \frac to \dfrac inside math expressions to prevent cramped overlapping in fractions with roots/powers
   processed = processed.replace(/\\frac(?=\{)/g, '\\dfrac');
 
-  return processed;
+  // Ensure $$ display math blocks have blank lines before and after so remark-math treats them as block-level.
+  // Split by $$ delimiters, then reassemble with guaranteed blank-line separation.
+  const parts = processed.split(/(\$\$)/);
+  if (parts.length > 1) {
+    let insideMath = false;
+    const result: string[] = [];
+    for (const part of parts) {
+      if (part === '$$') {
+        if (!insideMath) {
+          // Opening $$: ensure blank line before
+          const last = result.length > 0 ? result[result.length - 1] : '';
+          if (last && !last.endsWith('\n\n')) {
+            if (last.endsWith('\n')) {
+              result.push('\n');
+            } else {
+              result.push('\n\n');
+            }
+          }
+          result.push('$$');
+        } else {
+          // Closing $$: append and ensure blank line after
+          result.push('$$');
+          result.push('\n\n');
+        }
+        insideMath = !insideMath;
+      } else {
+        result.push(part);
+      }
+    }
+    processed = result.join('');
+  }
+
+  return processed.trim();
 }
 
 /**
