@@ -43,7 +43,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
         <main
           className={cn(
-            'flex-1 min-h-[calc(100vh-4rem)] transition-all duration-300',
+            'flex-1 w-full min-w-0 min-h-[calc(100vh-4rem)] transition-all duration-300',
             isCollapsed ? 'lg:ml-16' : 'lg:ml-60'
           )}
         >

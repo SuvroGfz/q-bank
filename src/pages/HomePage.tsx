@@ -18,7 +18,7 @@ export const HomePage: React.FC = () => {
       />
 
       {/* Stats Cards Overview */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
         <StatCard
           label="Total Subjects"
           value={stats.totalSubjects}

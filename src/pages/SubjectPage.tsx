@@ -59,7 +59,7 @@ export const SubjectPage: React.FC = () => {
       </PageHeader>
 
       {/* Subject Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
         <StatCard
           label="Chapters Available"
           value={chapters.length}
