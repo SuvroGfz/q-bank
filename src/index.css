@@ -83,6 +83,11 @@
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
+  }
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
   }
   body {
     @apply bg-background text-foreground antialiased;

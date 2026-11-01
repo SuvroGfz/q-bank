@@ -30,25 +30,35 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, [isCollapsed]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col antialiased">
+    <div className="min-h-screen flex flex-col bg-background text-foreground transition-colors duration-300">
       <Header onToggleMobileSidebar={() => setIsMobileOpen(true)} />
 
-      <Sidebar
-        isCollapsed={isCollapsed}
-        onToggleCollapse={() => setIsCollapsed((prev) => !prev)}
-        isMobileOpen={isMobileOpen}
-        onMobileClose={() => setIsMobileOpen(false)}
-      />
+      <div className="flex flex-1 pt-16">
+        <Sidebar
+          isCollapsed={isCollapsed}
+          onToggleCollapse={() => setIsCollapsed((prev) => !prev)}
+          isMobileOpen={isMobileOpen}
+          onMobileClose={() => setIsMobileOpen(false)}
+        />
 
-      <div
+        <main
+          className={cn(
+            'flex-1 min-h-[calc(100vh-4rem)] transition-all duration-300',
+            isCollapsed ? 'lg:ml-16' : 'lg:ml-60'
+          )}
+        >
+          {children}
+        </main>
+      </div>
+
+      <footer
         className={cn(
-          'flex-1 flex flex-col pt-16 transition-all duration-300 ease-in-out',
+          'border-t border-border bg-card/40 py-8 px-4 sm:px-6 lg:px-8 text-center text-xs text-muted-foreground transition-all duration-300',
           isCollapsed ? 'lg:ml-16' : 'lg:ml-60'
         )}
       >
-        <main className="flex-1 w-full">{children}</main>
         <Footer />
-      </div>
+      </footer>
     </div>
   );
 };
